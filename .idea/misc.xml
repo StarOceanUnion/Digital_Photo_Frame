@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
+  <component name="CidrRootsConfiguration">
+    <sourceRoots>
+      <file path="$PROJECT_DIR$" />
+      <file path="$PROJECT_DIR$/Debug" />
+      <file path="$PROJECT_DIR$/Display" />
+      <file path="$PROJECT_DIR$/Encoding" />
+      <file path="$PROJECT_DIR$/File" />
+      <file path="$PROJECT_DIR$/Fonts" />
+      <file path="$PROJECT_DIR$/Input" />
+      <file path="$PROJECT_DIR$/Page" />
+      <file path="$PROJECT_DIR$/Render" />
+      <file path="$PROJECT_DIR$/include" />
+    </sourceRoots>
+  </component>
 </project>

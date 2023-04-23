@@ -1,8 +1,10 @@
-//
-// Created by A on 2023/4/19.
-//
+#ifndef _PAGE_MANAGER_H
+#define _PAGE_MANAGER_H
 
-#ifndef DIGITAL_PHOTO_FRAME_PAGE_MANAGER_H
-#define DIGITAL_PHOTO_FRAME_PAGE_MANAGER_H
-
-#endif //DIGITAL_PHOTO_FRAME_PAGE_MANAGER_H
+typedef struct PageAction{
+    char *name;
+    int (*Run)(void);
+    int (*GetInputEvent)();
+    struct PageAction *ptNext;     //it is a link list
+}T_PageAction, *PT_PageAction;
+#endif    //_PAGE_MANAGER_H
