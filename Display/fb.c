@@ -117,7 +117,37 @@ static int FBShowPixel (int iPenX, int iPenY, unsigned int dwColor)
 }
 static int FBCleanScreen (unsigned int dwBackColor)
 {
-
+    int red;
+    int green;
+    int blue;
+    switch (g_tFBDispOpr.iBpp)
+    {
+        case 8:
+        {
+            memset(g_pucFbMem, dwBackColor, g_iScreenSize);
+            break;
+        }
+        case 16:
+        {
+            red         = (dwColor >> (16+3)) & 0x1f;    //(dwColor >> 16) & 0xff
+            green       = (dwColor >> (8+2)) & 0x3f;
+            blue        = (dwColor >> 3) & 0x1f;
+            *pwPen16    = dwColor;
+            break;
+        }
+        case 32:
+        {
+            *pdwPen32 = dwColor;
+            break;
+        }
+        default:
+        {
+            DBG_PRINTF("can't support %dbpp\n", g_tVar.bits_per_pixel);
+            return -1;
+            break;
+        }
+    }
+    return 0;
 }
 
 
