@@ -120,24 +120,45 @@ static int FBCleanScreen (unsigned int dwBackColor)
     int red;
     int green;
     int blue;
+
+
+    unsigned char *pucPen8 = g_pucFbMem;    //the first address of frambuffer
+    unsigned short *pwPen16;
+    unsigned int *pdwPen32;
+    pwPen16     = (unsigned short *)pucPen8;
+    pdwPen32    = (unsigned int *)pucPen8;
+
+    int i;
     switch (g_tFBDispOpr.iBpp)
     {
         case 8:
         {
-            memset(g_pucFbMem, dwBackColor, g_iScreenSize);
+            memset(pucPen8, dwBackColor, g_iScreenSize);
             break;
         }
         case 16:
         {
-            red         = (dwColor >> (16+3)) & 0x1f;    //(dwColor >> 16) & 0xff
-            green       = (dwColor >> (8+2)) & 0x3f;
-            blue        = (dwColor >> 3) & 0x1f;
-            *pwPen16    = dwColor;
+            red         = (dwBackColor >> (16+3)) & 0x1f;    //(dwColor >> 16) & 0xff
+            green       = (dwBackColor >> (8+2)) & 0x3f;
+            blue        = (dwBackColor >> 3) & 0x1f;
+
+            for(i = 0; i < g_iScreenSize; i++)
+            {
+                *pwPen16    = dwBackColor;
+                pwPen16++;
+                i += 4;                   //short type ,it adds 2 bytes writing once
+            }
+
             break;
         }
         case 32:
         {
-            *pdwPen32 = dwColor;
+            for(i = 0; i < g_iScreenSize; i++)
+            {
+                *pdwPen32 = dwBackColor;
+                pdwPen32++;
+                i += 2;                   //short type ,it adds 2 bytes writing once
+            }
             break;
         }
         default:
