@@ -1,8 +1,14 @@
-//
-// Created by A on 2023/4/19.
-//
+#ifndef _ENCODING_MANAGER_H
+#define _ENCODING_MANAGER_H
 
-#ifndef DIGITAL_PHOTO_FRAME_ENCODING_MANAGER_H
-#define DIGITAL_PHOTO_FRAME_ENCODING_MANAGER_H
+typedef struct EncodingOpr{
+    char *name;
+    int iHeadLen;
+    PT_FontOpr ptFontOprSupportedHead;
+    int (*isSupport)(unsigned char *pucBufHead);
+    int (*GetCodeFrmBuf)(unsigned char *pucBufStart, unsigned char *pucBufEnd, unsigned int *pdwCode);
+    struct EncodingOpr *ptNext;
+}T_EncodingOpr, *PT_EncodingOpr;
 
-#endif //DIGITAL_PHOTO_FRAME_ENCODING_MANAGER_H
+
+#endif //_ENCODING_MANAGER_H
