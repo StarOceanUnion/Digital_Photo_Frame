@@ -12,6 +12,13 @@ typedef struct FontOpr{
     struct FontOpr *ptNext;
 }T_FontOpr, *PT_FontOpr;
 
+typedef struct FontBitMap{
+    int iXLeft;                 //ascii's bitmap var:
+    int iYTop;                  //ascii's bitmap var:
+
+
+}T_FontBitMap,* PT_FontBitMap;
+
 
 
 #endif //_FONTS_MANAGER_H

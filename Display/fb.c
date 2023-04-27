@@ -174,5 +174,5 @@ static int FBCleanScreen (unsigned int dwBackColor)
 
 int FBInit(void)
 {
-        RegisterDispOpr(&g_tFBDispOpr);   //register the fb's struct
+       return  RegisterDispOpr(&g_tFBDispOpr);   //register the fb's struct
 }

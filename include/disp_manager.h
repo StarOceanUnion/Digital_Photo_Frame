@@ -2,12 +2,12 @@
 #define _DISP_MANAGER_H
 
 typedef struct DispOpr{
-    char *name;
-    int iXres;
-    int iYres;
-    int iBpp;
-    int iLineWidth;               //the number of bytes that take up one line of data
-    unsigned char *pucDisoMem;    //frambuffer's address
+    char *name;                     //the name of device
+    int iXres;                      //it means the horizontal resolution of the LCD
+    int iYres;                      //it means the vertical resolution of the LCD
+    int iBpp;                       //the bits per pixel,it sometimes sets 8bits,16bits or 32bits
+    int iLineWidth;                 //the number of bytes that take up one line of data
+    unsigned char *pucDisoMem;      //frambuffer's address
     int (*DeviceInit) (void);
     int (*ShowPixel) (int iPenX, int iPenY, unsigned int dwColor);
     int (*CleanScreen) (unsigned int dwBackColor);
