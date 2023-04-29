@@ -6,7 +6,6 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <fcntl.h>
-#include <stdio.h>
 #include <sys/mman.h>
 
 static int FBDeviceInit (void);
@@ -15,8 +14,8 @@ static int FBCleanScreen (unsigned int dwBackColor);
 static int g_iFBFd;
 static struct fb_var_screeninfo g_tVar;   //current var
 static struct fb_fix_screeninfo g_tFix;   //current fix
-static int g_iScreenSize;
-static unsigned char* g_pucFbMem;
+static unsigned int g_iScreenSize;
+static unsigned char *g_pucFbMem;
 static int g_iLineWidth;
 static int g_iPixelWidth;
 
@@ -79,6 +78,7 @@ static int FBShowPixel (int iPenX, int iPenY, unsigned int dwColor)
     unsigned char *pucPen8 = g_pucFbMem + iPenY * g_iLineWidth + iPenX * g_iPixelWidth;
     unsigned short *pwPen16;
     unsigned int *pdwPen32;
+
     int red;
     int green;
     int blue;
@@ -98,7 +98,7 @@ static int FBShowPixel (int iPenX, int iPenY, unsigned int dwColor)
             red         = (dwColor >> (16+3)) & 0x1f;    //(dwColor >> 16) & 0xff
             green       = (dwColor >> (8+2)) & 0x3f;
             blue        = (dwColor >> 3) & 0x1f;
-            *pwPen16    = dwColor;
+            *pwPen16    = (red << 11) | (green << 5) | blue;
             break;
         }
         case 32:
@@ -144,9 +144,9 @@ static int FBCleanScreen (unsigned int dwBackColor)
 
             for(i = 0; i < g_iScreenSize; i++)
             {
-                *pwPen16    = dwBackColor;
+                *pwPen16    = (red << 11) | (green << 5) | blue;
                 pwPen16++;
-                i += 4;                   //short type ,it adds 2 bytes writing once
+                i += 2;                   //short type ,it adds 2 bytes writing once
             }
 
             break;
@@ -157,7 +157,7 @@ static int FBCleanScreen (unsigned int dwBackColor)
             {
                 *pdwPen32 = dwBackColor;
                 pdwPen32++;
-                i += 2;                   //short type ,it adds 2 bytes writing once
+                i += 4;                   //short type ,it adds 4 bytes writing once
             }
             break;
         }

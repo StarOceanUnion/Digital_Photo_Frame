@@ -14,4 +14,9 @@ typedef struct DispOpr{
     struct DispOpr *ptNext;         //it is a link list
 }T_DispOpr, *PT_DispOpr;
 
+int RegisterDispOpr(PT_DispOpr ptDispOpr);
+void ShowDispOpr(void);
+int DisplayInit(void);
+int FBInit(void);
+
 #endif //_DISP_MANAGER_H

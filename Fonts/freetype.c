@@ -1,9 +1,8 @@
 #include <ft2build.h>
-#include <freetype.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
-#include "../include/fonts_manager.h"
-#include "../include/config.h"
+#include <fonts_manager.h>
+#include <config.h>
 
 static int FreeTypeFontInit(char *pcFontFile, unsigned int dwFontSize);
 static int FreeTypeGetFontBitmap(unsigned int dwCode, PT_FontBitMap ptFontBitMap);
@@ -50,8 +49,8 @@ static int FreeTypeFontInit(char *pcFontFile, unsigned int dwFontSize)
 
 static int FreeTypeGetFontBitmap(unsigned int dwCode, PT_FontBitMap ptFontBitMap)
 {
-  int iPenX = ptFontBitMap->iCurrentOriginX;
-  int iPenY = ptFontBitMap->iCurrentOriginY;
+  int iPenX = ptFontBitMap->iCurOriginX;
+  int iPenY = ptFontBitMap->iCurOriginY;
 
   int iError;
   iError = FT_Load_Char(g_tFace, dwCode, FT_LOAD_RENDER | FT_LOAD_MONOCHROME);
@@ -68,7 +67,7 @@ static int FreeTypeGetFontBitmap(unsigned int dwCode, PT_FontBitMap ptFontBitMap
   ptFontBitMap -> iPitch        = g_tSlot->bitmap.pitch;
   ptFontBitMap -> iNextOriginX  = iPenX + g_tSlot->advance.x / 64;
   ptFontBitMap -> iNextOriginY  = iPenY;
-  ptFontBitMap -> pucBuffer     = g_tSlot->bitmap->buffer;
+  ptFontBitMap -> pucBuffer     = g_tSlot->bitmap.buffer;
 
   return 0;
 }

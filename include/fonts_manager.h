@@ -29,7 +29,13 @@ typedef struct FontOpr{
     struct FontOpr *ptNext;
 }T_FontOpr, *PT_FontOpr;
 
-
+int RegisterFontOpr(PT_FontOpr ptFontOpr);
+void ShowFontOpr(void);
+int FontsInit(void);
+int ASCIIInit(void);
+int GBKInit(void);
+int FreeTypeInit(void);
+PT_FontOpr GetFontOpr(char *pcName);
 
 
 #endif //_FONTS_MANAGER_H
