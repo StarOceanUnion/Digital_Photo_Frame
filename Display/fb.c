@@ -1,7 +1,7 @@
-#include "../include/disp_manager.h"
+#include <disp_manager.h>
 #include <linux/fb.h>
 #include <string.h>
-#include "../include/config.h"
+#include <config.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/ioctl.h>
