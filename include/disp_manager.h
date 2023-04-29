@@ -12,9 +12,9 @@ typedef struct DispOpr{
     int (*ShowPixel) (int iPenX, int iPenY, unsigned int dwColor);
     int (*CleanScreen) (unsigned int dwBackColor);
     struct DispOpr *ptNext;         //it is a link list
-}T_DispOpr, *PT_DispOpr;
+}T_DispOpr, *PT_PageAction;
 
-int RegisterDispOpr(PT_DispOpr ptDispOpr);
+int RegisterDispOpr(PT_PageAction ptDispOpr);
 void ShowDispOpr(void);
 int DisplayInit(void);
 int FBInit(void);
